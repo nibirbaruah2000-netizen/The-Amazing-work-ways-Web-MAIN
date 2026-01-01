@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Amazing Work Ways - Home</title>
+    <!-- CHANGE "YOUR BUSINESS NAME" to your actual business name above -->
+    <!-- Google Fonts for Material Icons (free icons) -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+    <!-- Google Fonts for Poppins font (modern, clean font) -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS CODE STARTS HERE - This styles your entire website */
+        /* All comments explain what each section does so you can easily customize */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif; /* Clean modern font */
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Beautiful gradient background */
+            min-height: 100vh;
+            overflow-x: hidden; /* Prevents horizontal scroll */
+        }
+
+        /* SIDEBAR STYLES - Fixed left sidebar that expands on hover */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh; /* Full screen height */
+            width: 80px; /* Collapsed width - only shows icons */
+            background: rgba(22, 26, 45, 0.95); /* Dark semi-transparent background */
+            backdrop-filter: blur(10px); /* Modern glass effect */
+            padding: 20px 15px;
+            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1); /* Smooth expand animation */
+            z-index: 1000;
+            box-shadow: 2px 0 20px rgba(0,0,0,0.3);
+        }
+
+        /* EXPANDS SIDEBAR ON HOVER - Shows text labels */
+        .sidebar:hover {
+            width: 280px;
+        }
+
+        /* LOGO/BRAND HEADER IN SIDEBAR */
+        .sidebar-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .sidebar-header .logo-icon {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, #ff6b6b, #feca57);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: white;
+            font-weight: bold;
+        }
+
+        /* BUSINESS NAME - EDIT THIS TEXT */
+        .sidebar-header h2 {
+            color: white;
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-left: 20px;
+            opacity: 0;
+            white-space: nowrap;
+            transform: translateX(-20px);
+            transition: all 0.3s ease;
+        }
+
+        .sidebar:hover .sidebar-header h2 {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* NAVIGATION LINKS CONTAINER */
+        .nav-links {
+            list-style: none;
+            flex: 1;
+            overflow-y: auto; /* Scroll if too many links */
+        }
+
+        .nav-links::-webkit-scrollbar {
+            display: none; /* Hide scrollbar */
+        }
+
+        /* INDIVIDUAL NAV LINKS */
+        .nav-links li a {
+            display: flex;
+            align-items: center;
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            padding: 16px 20px;
+            margin: 4px 0;
+            border-radius: 12px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* ICONS ONLY WHEN COLLAPSED */
+        .nav-links li a .icon {
+            font-size: 24px;
+            min-width: 24px;
+            margin-right: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        /* TEXT LABELS - HIDDEN WHEN COLLAPSED */
+        .nav-links li a span.text {
+            opacity: 0;
+            white-space: nowrap;
+            transform: translateX(-20px);
+            transition: all 0.3s ease;
+        }
+
+        /* SHOW TEXT ON HOVER/EXPAND */
+        .sidebar:hover .nav-links li a span.text {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* HOVER EFFECTS FOR LINKS */
+        .nav-links li a:hover {
+            background: rgba(255,255,255,0.15);
+            color: white;
+            transform: translateX(8px);
+        }
+
+        .nav-links li a:hover .icon {
+            transform: scale(1.1);
+        }
+
+        /* ACTIVE PAGE HIGHLIGHT - Changes "home" to current page */
+        .nav-links li.active a {
+            background: linear-gradient(135deg, rgba(255,107,107,0.3), rgba(254,202,87,0.3));
+            color: white;
+            box-shadow: 0 4px 20px rgba(255,107,107,0.3);
+        }
+
+        /* MAIN CONTENT AREA - Pushes right when sidebar expands */
+        .main-content {
+            margin-left: 80px; /* Matches collapsed sidebar width */
+            padding: 40px;
+            min-height: 100vh;
+            transition: margin-left 0.4s ease;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .sidebar:hover ~ .main-content {
+            margin-left: 280px; /* Matches expanded sidebar width */
+        }
+
+        /* RESPONSIVE - MOBILE FRIENDLY */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 280px;
+                transform: translateX(-100%);
+            }
+            
+            .sidebar.active {
+                transform: translateX(0);
+            }
+            
+            .main-content {
+                margin-left: 0;
+            }
+            
+            .sidebar:hover ~ .main-content {
+                margin-left: 0;
+            }
+            
+            .mobile-toggle {
+                display: block;
+                position: fixed;
+                top: 20px;
+                left: 20px;
+                z-index: 1001;
+                background: rgba(22,26,45,0.9);
+                border: none;
+                padding: 15px;
+                border-radius: 12px;
+                color: white;
+                font-size: 20px;
+                cursor: pointer;
+            }
+        }
+
+        /* PAGE CONTENT STYLES */
+        .page {
+            display: none;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            animation: slideIn 0.6s ease-out;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        h1 {
+            font-size: 3rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+        }
+
+        /* ANIMATIONS */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        /* MOBILE TOGGLE BUTTON - HIDDEN ON DESKTOP */
+        .mobile-toggle {
+            display: none;
+        }
+
+        /* FOOTER */
+        footer {
+            margin-top: 60px;
+            text-align: center;
+            color: rgba(255,255,255,0.8);
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- MOBILE MENU TOGGLE BUTTON -->
+    <button class="mobile-toggle" onclick="toggleSidebar()">☰</button>
+
+    <!-- SIDEBAR NAVIGATION -->
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <!-- CHANGE "YB" TO YOUR INITIALS/LOGO -->
+            <div class="logo-icon">YB</div>
+            <h2>YOUR BUSINESS NAME</h2> <!-- EDIT YOUR BUSINESS NAME HERE -->
+        </div>
+        
+        <ul class="nav-links">
+            <li class="active" onclick="showPage('home')">
+                <a href="#">
+                    <span class="material-symbols-outlined icon">home</span>
+                    <span class="text">Home</span>
+                </a>
+            </li>
+            <li onclick="showPage('about')">
+                <a href="#">
+                    <span class="material-symbols-outlined icon">info</span>
+                    <span class="text">About Us</span>
+                </a>
+            </li>
+            <li onclick="showPage('products')">
+                <a href="#">
+                    <span class="material-symbols-outlined icon">storefront</span>
+                    <span class="text">Products</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- MAIN CONTENT AREA -->
+    <main class="main-content">
+        <!-- HOME PAGE -->
+        <section id="home" class="page active">
+            <h1>Welcome to The amazing work ways</h1>
+            <p>We Create More than just a web but we also add games ,AI Coders ,Etc.</p>
+            <p>Add your hero section, featured products, testimonials, or call-to-action buttons here.</p>
+        </section>
+
+        <!-- ABOUT US PAGE -->
+        <section id="about" class="page">
+            <h1>About Us</h1>
+            <p>Tell your business story here. Include your mission, vision, team information, and what makes you unique.</p>
+            <p>Add images, timelines, team member cards, or achievement stats in this section.</p>
+        </section>
+
+        <!-- PRODUCTS PAGE -->
+        <section id="products" class="page">
+            <h1>Our Products</h1>
+            <p>Showcase your products/services here. Create product grids, pricing tables, or feature comparisons.</p>
+            <p>This is where customers browse what you offer. Make it visually appealing!</p>
+        </section>
+
+        <footer>
+            &copy; 2026 YOUR BUSINESS NAME. All rights reserved. | Built with ❤️ for your .com domain
+        </footer>
+    </main>
+
+    <script>
+        // JAVASCRIPT CODE - Handles page switching and mobile menu
+        // All functions are explained with comments
+
+        function showPage(pageId) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active'));
+            
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
+            
+            // Update active link in sidebar
+            const links = document.querySelectorAll('.nav-links li');
+            links.forEach(link => link.classList.remove('active'));
+            event.currentTarget.parentElement.classList.add('active');
+            
+            // Close mobile sidebar after selection
+            if (window.innerWidth <= 768) {
+                document.getElementById('sidebar').classList.remove('active');
+            }
+        }
+
+        function toggleSidebar() {
+            // Mobile menu toggle
+            document.getElementById('sidebar').classList.toggle('active');
+        }
+
+        // Close mobile sidebar when clicking outside
+        document.addEventListener('click', function(event) {
+            const sidebar = document.getElementById('sidebar');
+            const toggle = document.querySelector('.mobile-toggle');
+            
+            if (window.innerWidth <= 768 && 
+                !sidebar.contains(event.target) && 
+                !toggle.contains(event.target) &&
+                sidebar.classList.contains('active')) {
+                sidebar.classList.remove('active');
+            }
+        });
+
+        // Smooth scrolling for anchor links (if you add #links later)
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+            });
+        });
+    </script>
+</body>
+  </html>
